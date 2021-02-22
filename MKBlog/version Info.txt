@@ -1,0 +1,3 @@
+sts 3.9.15
+apache-tomcat-9.0.43
+jdk-15.0.2
