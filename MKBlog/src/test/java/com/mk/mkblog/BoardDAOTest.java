@@ -24,7 +24,7 @@ public class BoardDAOTest {
 	@Inject
 	private BoardDAO boardDAO;
 
-	@Test 
+	@Test @Ignore
 	public void testGetBoardList() throws Exception {
 		List<BoardVO> boardList = boardDAO.getBoardList();
 		logger.info("\n Board List \n");
@@ -37,7 +37,7 @@ public class BoardDAOTest {
 		}
 	}
 	
-	@Test @Ignore
+	@Test
 	public void testGetBoardContent() throws Exception {
 		BoardVO boardVO = boardDAO.getBoardContent(1);
 		logger.info("\n Board List \n ");
@@ -63,8 +63,8 @@ public class BoardDAOTest {
 		BoardVO boardVO = new BoardVO();
 
 		boardVO.setCate_cd("1");
-		boardVO.setTitle("첫번째 게시물 입니다.");
-		boardVO.setContent("첫번째 게시물입니다.");
+		boardVO.setTitle("二番目の文です。");
+		boardVO.setContent("二番目の文です。");
 		boardVO.setTag("1");
 		boardVO.setReg_id("1");
 		
@@ -103,7 +103,7 @@ public class BoardDAOTest {
 	@Test @Ignore
 	public void tesDeleteBoard() throws Exception {
 
-		int result = boardDAO.deleteBoard(1);
+		int result = boardDAO.deleteBoard(3);
 
 		logger.info("\n Delete Board Result \n ");
 
