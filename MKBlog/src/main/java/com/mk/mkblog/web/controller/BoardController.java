@@ -2,14 +2,19 @@ package com.mk.mkblog.web.controller;
 
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.mk.mkblog.common.Pagination;
+import com.mk.mkblog.common.Search;
 import com.mk.mkblog.web.model.BoardVO;
 import com.mk.mkblog.web.service.BoardService;
 
@@ -20,9 +25,28 @@ public class BoardController {
 	@Inject
 	private BoardService boardService;
 	
+	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
+	
+	//@RequestParam、required = false -> ゲットしたパラメータがない場合、例外の処理
 	@RequestMapping(value = "/getBoardList", method = RequestMethod.GET)
-	public String getBoardList(Model model) throws Exception{
-		model.addAttribute("boardList", boardService.getBoardList());
+	public String getBoardList(Model model, @RequestParam(required = false, defaultValue = "1")int page,
+			@RequestParam(required = false, defaultValue = "1")int range,
+			@RequestParam(defaultValue = "title")String searchType,
+			@RequestParam(required = false, defaultValue = "")String keyword,
+			@ModelAttribute("search")Search search
+			) throws Exception{
+		
+		logger.info("!!!!!!!!!!!!!!!!!!!!!!!!!!! searchType : " + searchType);
+		model.addAttribute("search", search);
+		search.setSearchType(searchType);
+		search.setKeyword(keyword);
+		
+		int listCnt = boardService.getBoardListCnt(search);
+		
+		search.pageInfo(page, range, listCnt);
+		
+		model.addAttribute("pagination", search);
+		model.addAttribute("boardList", boardService.getBoardList(search));
 		return "/board/index";
 	}
 	
@@ -63,4 +87,12 @@ public class BoardController {
 		boardService.deleteBoard(bid);
 		return "redirect:/board/getBoardList";
 	}
+	
+	
+	 @ExceptionHandler(RuntimeException.class) 
+	 public String exceptionHandler(Model model, Exception e) { 
+		 logger.info("exception : " +
+		 e.getMessage()); return "error/exception"; 
+	}
+	 
 }

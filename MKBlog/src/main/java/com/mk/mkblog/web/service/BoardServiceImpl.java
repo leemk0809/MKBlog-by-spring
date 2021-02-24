@@ -4,7 +4,10 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.mk.mkblog.common.Pagination;
+import com.mk.mkblog.common.Search;
 import com.mk.mkblog.web.dao.BoardDAO;
 import com.mk.mkblog.web.model.BoardVO;
 
@@ -15,8 +18,8 @@ public class BoardServiceImpl implements BoardService{
 	private BoardDAO boardDAO;
 	
 	@Override
-	public List<BoardVO> getBoardList() throws Exception{
-		return boardDAO.getBoardList();
+	public List<BoardVO> getBoardList(Search search) throws Exception{
+		return boardDAO.getBoardList(search);
 	}
 
 	@Override
@@ -26,6 +29,7 @@ public class BoardServiceImpl implements BoardService{
 		boardDAO.insertBoard(boardVO);
 	}
 
+	@Transactional
 	@Override
 	public BoardVO getBoardContent(int bid) throws Exception {
 		boardDAO.updateViewCnt(bid);
@@ -39,8 +43,14 @@ public class BoardServiceImpl implements BoardService{
 		boardDAO.updateBoard(boardVO);		
 	}
 
+	@Transactional
 	@Override
 	public void deleteBoard(int bid) throws Exception {
 		boardDAO.deleteBoard(bid);
+	}
+
+	@Override
+	public int getBoardListCnt(Search search) throws Exception {
+		return boardDAO.getBoardListCnt(search);
 	}
 }

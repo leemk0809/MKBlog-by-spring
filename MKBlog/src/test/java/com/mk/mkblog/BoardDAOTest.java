@@ -1,7 +1,5 @@
 package com.mk.mkblog;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
 import org.junit.Ignore;
@@ -12,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.mk.mkblog.common.Search;
 import com.mk.mkblog.web.dao.BoardDAO;
 import com.mk.mkblog.web.model.BoardVO;
 
@@ -24,6 +23,8 @@ public class BoardDAOTest {
 	@Inject
 	private BoardDAO boardDAO;
 
+	/*
+	//ページンぐ前の物
 	@Test @Ignore
 	public void testGetBoardList() throws Exception {
 		List<BoardVO> boardList = boardDAO.getBoardList();
@@ -36,8 +37,8 @@ public class BoardDAOTest {
 			logger.info("データがありません。");
 		}
 	}
-	
-	@Test
+	*/
+	@Test @Ignore
 	public void testGetBoardContent() throws Exception {
 		BoardVO boardVO = boardDAO.getBoardContent(1);
 		logger.info("\n Board List \n ");
@@ -59,23 +60,27 @@ public class BoardDAOTest {
 
 	@Test @Ignore
 	public void testInsertBoard() throws Exception {
-
+		
 		BoardVO boardVO = new BoardVO();
 
 		boardVO.setCate_cd("1");
-		boardVO.setTitle("二番目の文です。");
-		boardVO.setContent("二番目の文です。");
+		//boardVO.setTitle("1番目の文です。");
+		//boardVO.setContent("1番目の文です。");
 		boardVO.setTag("1");
 		boardVO.setReg_id("1");
 		
-		int result = boardDAO.insertBoard(boardVO);
+		for(int i = 30; i < 1234 ; i++) {
+			boardVO.setTitle(i + "番目の文です。");
+			boardVO.setContent(i + "番目の文です。");
+			int result = boardDAO.insertBoard(boardVO);
 
-		logger.info("\n Insert Board Result " + result);
+			logger.info("\n Insert Board Result " + result);
 
-		if (result == 1) {
-			logger.info("\n 게시물 등록 성공 ");
-		} else {
-			logger.info("\n 게시물 등록 실패");
+			if (result == 1) {
+				logger.info("\n 게시물 등록 성공 ");
+			} else {
+				logger.info("\n 게시물 등록 실패");
+			}
 		}
 	}
 
@@ -125,4 +130,24 @@ public class BoardDAOTest {
 			logger.info("\n 게시물 조회수 업데이트 실패");
 		}
 	}
+	
+	
+	 @Test @Ignore
+	 public void testGetlistCnt() throws Exception{
+	  
+		 Search search = new Search();
+		 search.setSearchType("reg_id");
+		 search.setKeyword("風");
+		 int listCnt = boardDAO.getBoardListCnt(search);
+		 logger.info("listCnt : " + listCnt); 
+	 }
+	 
+	 @Test
+	 public void testGetList() throws Exception{
+		 Search search = new Search();
+		 search.setSearchType("reg_id");
+		 search.setKeyword("風");
+		 
+		 boardDAO.getBoardList(search);
+	 }
 }

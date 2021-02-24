@@ -7,7 +7,38 @@
 <head>
 <meta charset="UTF-8">
 <title>ボード</title>
+<c:url var="getBoardList" value="/board/getBoardList">
+</c:url>
 <script>
+	function fn_prev(page, range, rangeSize){
+		var page = ((range - 2) * rangeSize) + 1;
+		var range = range - 1;
+		
+		var url = "${getBoardList}";
+		url = url + "?page=" + page;
+		url = url + "&range=" + range;
+		
+		location.href = url;
+	}
+	function fn_pagination(page, range, rangeSize, searchType, keyword){
+		var url = "${getBoardList}";
+		url = url + "?page=" + page;
+		url = url + "&range=" + range;
+		url = url + "&searchType=" + searchType;
+		url = url + "&keyword=" + keyword;
+		
+		location.href = url;
+	}
+	function fn_next(page, range, rangeSize){
+		var page = parseInt((range * rangeSize)) + 1;
+		var range = parseInt(range) + 1;
+		var url = "${getBoardList}";
+		url = url + "?page=" + page;
+		url = url + "&range=" + range;
+
+		location.href = url;
+	}
+	
 	$(document).on('click', '#btnWriteForm', function(e){
 		e.preventDefault();
 		
@@ -19,6 +50,16 @@
 		url = url + "?bid=" + bid;
 		location.href = url;
 	}
+	
+	$(document).on('click', '#btnSearch', function(e){
+		e.preventDefault();
+		var url = "${getBoardList}";
+		url = url + "?searchType=" + $('#searchType').val();
+		url = url + "&keyword=" + $('#keyword').val();
+		//日本語の検索の為に必要です。
+		location.href = encodeURI(url);
+		console.log(url);
+	});
 </script>
 </head>
 <body>
@@ -70,6 +111,52 @@
 			<div>
 				<button type="button" class="btn btn-sm btn-primary" id="btnWriteForm">作成</button>
 			</div>
+			
+			<!-- pagination(s) -->
+			<div id="paginationBox">
+				<ul class="pagination">
+					<c:if test="${pagination.prev }">
+						<li class="page-item">
+							<a class="page-link" href="#" onClick="fn_prev('${pagination.page}',
+									'${pagination.range}','${pagination.rangeSize}')">前</a>
+						</li>
+					</c:if>
+					
+					<c:forEach begin="${pagination.startPage }" end="${pagination.endPage }" var="idx">
+						<li class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/>">
+							<a class="page-link" href="#" onClick="fn_pagination('${idx }', '${pagination.range}', '${pagination.rangeSize}',
+							 '${pagination.searchType }', '${pagination.keyword }')">
+								${idx }
+							</a>
+						</li>					
+					</c:forEach>
+					
+					<c:if test="${pagination.next }">
+						<li class="page-item">
+							<a class="page-link" href="#" onClick="fn_next('${pagination.page}',
+								'${pagination.range}','${pagination.rangeSize}')">次</a>
+						</li>
+					</c:if>
+				</ul>
+			</div>
+			<!-- pagination(e) -->			
+			<!-- search(s) -->
+			<div class="form-group row justify-content-center">
+				<div class="w100" style="padding-right:10px">
+					<select class="form-control form-control-sm" name="searchType" id="searchType">
+						<option value="title">タイトル</option>
+						<option value="content">内容</option>
+						<option value="reg_id">作成者</option>
+					</select>
+				</div>
+				<div class="w300" style="padding-right:10px">
+					<input type="text" class="form-control form-control-sm" name="keyword" id="keyword">					
+				</div>
+				<div>
+					<button class="btn btn-sm btn-primary" name="btnSearch" id="btnSearch">検索</button>
+				</div>
+			</div>	
+			<!-- search(e) -->
 		</div>
 	</article>
 </body>
