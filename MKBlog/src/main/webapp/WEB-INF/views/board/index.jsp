@@ -112,7 +112,7 @@
 				<button type="button" class="btn btn-sm btn-primary" id="btnWriteForm">作成</button>
 			</div>
 			
-			<!-- pagination(s) -->
+			<!-- pagination{s} -->
 			<div id="paginationBox">
 				<ul class="pagination">
 					<c:if test="${pagination.prev }">
@@ -139,8 +139,8 @@
 					</c:if>
 				</ul>
 			</div>
-			<!-- pagination(e) -->			
-			<!-- search(s) -->
+			<!-- pagination{e} -->			
+			<!-- search{s} -->
 			<div class="form-group row justify-content-center">
 				<div class="w100" style="padding-right:10px">
 					<select class="form-control form-control-sm" name="searchType" id="searchType">
@@ -156,7 +156,7 @@
 					<button class="btn btn-sm btn-primary" name="btnSearch" id="btnSearch">検索</button>
 				</div>
 			</div>	
-			<!-- search(e) -->
+			<!-- search{e} -->
 		</div>
 	</article>
 </body>

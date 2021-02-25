@@ -1,5 +1,7 @@
 package com.mk.mkblog.web.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -11,11 +13,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.mk.mkblog.common.Pagination;
 import com.mk.mkblog.common.Search;
 import com.mk.mkblog.web.model.BoardVO;
+import com.mk.mkblog.web.model.ReplyVO;
 import com.mk.mkblog.web.service.BoardService;
 
 @Controller
@@ -36,7 +39,6 @@ public class BoardController {
 			@ModelAttribute("search")Search search
 			) throws Exception{
 		
-		logger.info("!!!!!!!!!!!!!!!!!!!!!!!!!!! searchType : " + searchType);
 		model.addAttribute("search", search);
 		search.setSearchType(searchType);
 		search.setKeyword(keyword);
@@ -70,6 +72,7 @@ public class BoardController {
 	@RequestMapping(value = "/getBoardContent", method = RequestMethod.GET)
 	public String getBoardContent(Model model, @RequestParam("bid")int bid) throws Exception{
 		model.addAttribute("boardContent", boardService.getBoardContent(bid));
+		model.addAttribute("replyVO", new ReplyVO());
 		return "board/boardContent";
 	}
 	
@@ -94,5 +97,11 @@ public class BoardController {
 		 logger.info("exception : " +
 		 e.getMessage()); return "error/exception"; 
 	}
+	 
+	 @ResponseBody //　非同期化の為
+	 @RequestMapping(value="/getReplyList", method = RequestMethod.POST)
+	 public List<ReplyVO> getReplyList(int bid) throws Exception{
+		 return boardService.getReplyList(bid);
+	 }
 	 
 }

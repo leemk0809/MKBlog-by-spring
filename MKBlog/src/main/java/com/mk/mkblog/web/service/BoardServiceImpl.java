@@ -10,6 +10,7 @@ import com.mk.mkblog.common.Pagination;
 import com.mk.mkblog.common.Search;
 import com.mk.mkblog.web.dao.BoardDAO;
 import com.mk.mkblog.web.model.BoardVO;
+import com.mk.mkblog.web.model.ReplyVO;
 
 @Service
 public class BoardServiceImpl implements BoardService{
@@ -52,5 +53,25 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public int getBoardListCnt(Search search) throws Exception {
 		return boardDAO.getBoardListCnt(search);
+	}
+
+	@Override
+	public List<ReplyVO> getReplyList(int bid) throws Exception {
+		return boardDAO.getReplyList(bid);
+	}
+
+	@Override
+	public int saveReply(ReplyVO replyVO) throws Exception {
+		return boardDAO.saveReply(replyVO);
+	}
+
+	@Override
+	public int updateReply(ReplyVO replyVO) throws Exception {
+		return boardDAO.updateReply(replyVO);
+	}
+
+	@Override
+	public int deleteReply(int rid) throws Exception {
+		return boardDAO.deleteReply(rid);
 	}
 }

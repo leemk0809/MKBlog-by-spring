@@ -2,9 +2,9 @@ package com.mk.mkblog.web.dao;
 
 import java.util.List;
 
-import com.mk.mkblog.common.Pagination;
 import com.mk.mkblog.common.Search;
 import com.mk.mkblog.web.model.BoardVO;
+import com.mk.mkblog.web.model.ReplyVO;
 
 public interface BoardDAO {
 	public List<BoardVO> getBoardList(Search search) throws Exception;
@@ -14,6 +14,10 @@ public interface BoardDAO {
 	public int deleteBoard(int bid) throws Exception;
 	public int updateViewCnt(int bid) throws Exception;
 	public int getBoardListCnt(Search search) throws Exception;
+	public List<ReplyVO> getReplyList(int bid) throws Exception;
+	public int saveReply(ReplyVO replyVO) throws Exception;
+	public int updateReply(ReplyVO replyVO) throws Exception;
+	public int deleteReply(int rid) throws Exception;
 }
 
 
