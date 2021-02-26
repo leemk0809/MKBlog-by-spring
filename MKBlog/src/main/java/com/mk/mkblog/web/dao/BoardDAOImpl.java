@@ -55,22 +55,22 @@ public class BoardDAOImpl implements BoardDAO{
 
 	@Override
 	public List<ReplyVO> getReplyList(int bid) throws Exception {
-		return sqlSession.selectList("com.mk.mkblog.web.board.RelpyMapper.getReplyList", bid);
+		return sqlSession.selectList("com.mk.mkblog.web.board.replyMapper.getReplyList", bid);
 	}
 
 	@Override
 	public int saveReply(ReplyVO replyVO) throws Exception {
-		return sqlSession.insert("com.mk.mkblog.web.board.RelpyMapper.saveReply", replyVO);
+		return sqlSession.insert("com.mk.mkblog.web.board.replyMapper.saveReply", replyVO);
 	}
 
 	@Override
 	public int updateReply(ReplyVO replyVO) throws Exception {
-		return sqlSession.update("com.mk.mkblog.web.board.RelpyMapper.updateReply", replyVO);
+		return sqlSession.update("com.mk.mkblog.web.board.replyMapper.updateReply", replyVO);
 	}
 
 	@Override
 	public int deleteReply(int rid) throws Exception {
-		return sqlSession.delete("com.mk.mkblog.web.board.RelpyMapper.deleteReply", rid);
+		return sqlSession.delete("com.mk.mkblog.web.board.replyMapper.deleteReply", rid);
 	}
 
 }

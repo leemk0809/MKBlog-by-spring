@@ -142,12 +142,20 @@ public class BoardDAOTest {
 		 logger.info("listCnt : " + listCnt); 
 	 }
 	 
-	 @Test
-	 public void testGetList() throws Exception{
-		 Search search = new Search();
-		 search.setSearchType("reg_id");
-		 search.setKeyword("風");
+		
+	 @Test @Ignore
+	 public void testGetList() throws Exception{ 
+		 Search search = new
+		 Search(); search.setSearchType("reg_id"); search.setKeyword("風");
 		 
-		 boardDAO.getBoardList(search);
-	 }
+		 boardDAO.getBoardList(search); 
+	}
+		
+	 
+	
+	@Test 
+	public void testGetreplyList() throws Exception{
+		boardDAO.getReplyList(2437); 
+	}
+		
 }

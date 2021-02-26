@@ -8,10 +8,8 @@
 <head>
 <meta charset="UTF-8">
 <title>ボード</title>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script>
-	$(document).ready(function(){
-		showReplyList();
-	});
 	$(document).on('click','#btnList',function(e){
 		location.href = "${pageContext.request.contextPath}/board/getBoardList";
 	});
@@ -46,9 +44,9 @@
 				} else {
 					$(result).each(function(){
 						htmls += '<div class="media text-muted pt-3" id="rid' + this.rid + '">';
-	                     htmls += '<svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" 
-	                     	xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" 
-	                     	focusable="false" role="img" aria-label="Placeholder:32x32">';
+	                     htmls += '<svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" ' +
+	                		'xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"' +
+	                		' focusable="false" role="img" aria-label="Placeholder:32x32">';
 	                     htmls += '<title>プレイスホルダー</title>';
 	                     htmls += '<rect width="100%" height="100%" fill="#007bff"></rect>';
 	                     htmls += '<text x="50%" fill="#007bff" dy=".3em">32x32</text>';
@@ -71,6 +69,38 @@
 			}
 		});
 	}
+	
+	$(document).on('click', '#btnReplySave', function(){
+		var replyContent = $('#content').val();
+		var replyReg_id = $('#reg_id').val();
+		var paramData = JSON.stringify({"content": replyContent
+				, "reg_id": replyReg_id
+				, "bid":'${boardContent.bid}'
+		});
+		var headers = {"Content-Type" : "application/json"
+				, "X-HTTP-Method-Override" : "POST"};
+
+		$.ajax({
+			url: "${pageContext.request.contextPath}/board/saveReply",
+			headers : headers,
+			data : paramData,
+			type : 'POST',
+			dataType : 'text',
+			success: function(result){
+				console.log("success!!!");
+				showReplyList();
+				$('#content').val('');
+				$('#reg_id').val('');
+			},
+			error: function(error){
+				console.log("에러 : " + error);
+			}
+		});
+	}); 
+	
+	$(document).ready(function(){
+		showReplyList();
+	});
 </script>
 </head>
 <body>

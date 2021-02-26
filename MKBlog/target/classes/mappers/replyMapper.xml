@@ -13,7 +13,7 @@
 		FROM
 			TBL_REPLY
 		WHERE
-			BID = ${bid}
+			BID = #{bid}
 		ORDER BY REG_DT DESC 
 	</select>
 	
