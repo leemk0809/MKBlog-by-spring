@@ -8,7 +8,6 @@
 <head>
 <meta charset="UTF-8">
 <title>ボード</title>
-
 <script>
 	$(document).on('click', '#btnSave', function(e){
 		e.preventDefault();

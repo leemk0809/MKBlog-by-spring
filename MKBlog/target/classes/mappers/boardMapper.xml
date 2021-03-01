@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.mk.mkBlog.web.board.boardMapper">
+<mapper namespace="com.mk.mkblog.web.board.boardMapper">
 	<select id="getBoardListCnt" resultType="int">
 		SELECT
 			count(*) as listCnt
@@ -21,7 +21,7 @@
 	</select>
 
 	<select id="getBoardList"
-		resultType="com.mk.mkblog.web.model.BoardVO">
+		resultType="com.mk.mkblog.web.board.model.BoardVO">
 		SELECT
 			BID, CATE_CD, TITLE, CONTENT, TAG, VIEW_CNT, REG_ID,
 			REG_DT, EDIT_DT
@@ -43,8 +43,8 @@
 	</select>
 
 	<select id="getBoardContent"
-		resultType="com.mk.mkblog.web.model.BoardVO"
-		parameterType="com.mk.mkblog.web.model.BoardVO">
+		resultType="com.mk.mkblog.web.board.model.BoardVO"
+		parameterType="com.mk.mkblog.web.board.model.BoardVO">
 		SELECT
 			BID, CATE_CD, TITLE, CONTENT, TAG, VIEW_CNT, REG_ID, REG_DT, EDIT_DT
 		FROM
@@ -54,7 +54,7 @@
 	</select>
 
 	<insert id="insertBoard"
-		parameterType="com.mk.mkblog.web.model.BoardVO">
+		parameterType="com.mk.mkblog.web.board.model.BoardVO">
 		INSERT INTO TBL_BOARD (CATE_CD, TITLE, CONTENT, TAG,
 		VIEW_CNT, REG_ID, REG_DT, EDIT_DT)
 		VALUES (#{cate_cd}, #{title},
@@ -62,7 +62,7 @@
 	</insert>
 
 	<update id="updateBoard"
-		parameterType="com.mk.mkblog.web.model.BoardVO">
+		parameterType="com.mk.mkblog.web.board.model.BoardVO">
 		UPDATE TBL_BOARD
 		SET
 			CATE_CD = #{cate_cd}, TITLE=#{title}, 
@@ -78,7 +78,7 @@
 	</delete>
 
 	<update id="updateViewCnt"
-		parameterType="com.mk.mkblog.web.model.BoardVO">
+		parameterType="com.mk.mkblog.web.board.model.BoardVO">
 		UPDATE TBL_BOARD
 		SET
 			VIEW_CNT = VIEW_CNT + 1

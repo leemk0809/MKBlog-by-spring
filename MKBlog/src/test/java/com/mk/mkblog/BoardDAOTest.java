@@ -11,8 +11,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.mk.mkblog.common.Search;
-import com.mk.mkblog.web.dao.BoardDAO;
-import com.mk.mkblog.web.model.BoardVO;
+import com.mk.mkblog.web.board.dao.BoardDAO;
+import com.mk.mkblog.web.board.model.BoardVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring/root-context.xml", "classpath:spring/dataSource-context.xml" })
