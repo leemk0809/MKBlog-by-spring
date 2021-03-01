@@ -102,13 +102,13 @@ public class BoardController {
 	}
 	 
 	 @ResponseBody //　非同期化の為
-	 @RequestMapping(value="/getReplyList", method = RequestMethod.POST)
+	 @RequestMapping(value = "/getReplyList", method = RequestMethod.POST)
 	 public List<ReplyVO> getReplyList(int bid) throws Exception{
 		 return boardService.getReplyList(bid);
 	 }
 	 
 	 @ResponseBody
-	 @RequestMapping(value="/saveReply", method = RequestMethod.POST)
+	 @RequestMapping(value = "/saveReply", method = RequestMethod.POST)
 	 public Map<String, Object> saveReply(@RequestBody ReplyVO replyVO) throws Exception{
 		 Map<String, Object> result = new HashMap<>();
 		 
@@ -121,5 +121,33 @@ public class BoardController {
 		 }
 		 
 		 return result; 
+	 }
+	 
+	 @ResponseBody
+	 @RequestMapping(value = "/updateReply", method = RequestMethod.POST)
+	 public Map<String, Object> updateReply(@RequestBody ReplyVO replyVO) throws Exception{
+		 Map<String, Object> result = new HashMap<>();
+		 try {
+			 boardService.updateReply(replyVO);
+			 result.put("status", "OK");
+		 } catch(Exception e) {
+			 e.printStackTrace();
+			 result.put("status", "False");
+		 }
+		 return result;
+	 }
+	 
+	 @ResponseBody
+	 @RequestMapping(value = "/deleteReply", method = RequestMethod.POST)
+	 public Map<String, Object> deleteReply(@RequestParam("rid")int rid) throws Exception{
+		 Map<String, Object> result = new HashMap<>();
+		 try {
+			 boardService.deleteReply(rid);
+			 result.put("status", "OK");
+		 } catch(Exception e) {
+			 e.printStackTrace();
+			 result.put("status", "False");
+		 }
+		 return result;
 	 }
 }
