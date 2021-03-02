@@ -31,7 +31,6 @@ public class RestMenuController {
 		Map<String,Object> result = new HashMap<String, Object>();
 		
 		try {
-			logger.info("aaaaaaaaaaaaaaaaaaaaaaa");
 			result.put("menuList", menuService.getMenuList());
 			result.put("status", "OK");
 		} catch (Exception e) {

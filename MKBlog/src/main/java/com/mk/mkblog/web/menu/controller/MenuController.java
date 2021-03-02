@@ -1,7 +1,5 @@
 package com.mk.mkblog.web.menu.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,9 +11,7 @@ import com.mk.mkblog.web.menu.model.MenuVO;
 @RequestMapping("/menu")
 public class MenuController {
 	
-	private Logger logger = LoggerFactory.getLogger(MenuController.class);
-	
-	@RequestMapping(value="getMenuList", method=RequestMethod.GET)
+	@RequestMapping(value="/getMenuList", method=RequestMethod.GET)
 	public String getMenuList(Model model) throws Exception{
 		model.addAttribute("menuVO", new MenuVO());
 		return "/menu/menu";
