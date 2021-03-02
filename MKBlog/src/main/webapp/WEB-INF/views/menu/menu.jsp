@@ -18,6 +18,7 @@
 	$(function(){ 
 		fn_showList(); 
 	}); 
+	
 	function fn_showList(){
 		var paramData = {}; 
 		$.ajax({ 
@@ -34,7 +35,12 @@
 						result.menuList.forEach(function(e) { 
 							htmls += '<tr>'; 
 							htmls += '<td>' + e.mid + '</td>'; 
-							htmls += '<td>' + e.code + '</td>'; 
+							htmls += '<td>';
+							//e.codeで修正します。
+							htmls += '<a href="#" onClick="fn_menuInfo(' + e.mid + ',\'' + e.code 
+									+'\',\'' + e.codename + '\', ' + e.sort_num + ', \'' + e.comment + '\')" >';
+							htmls += e.code 
+							htmls += '</td>'; 
 							htmls += '<td>' + e.codename + '</td>'; 
 							htmls += '<td>' + e.sort_num + '</td>'; 
 							htmls += '<td>' + e.comment + '</td>'; 
@@ -48,15 +54,36 @@
 			} 
 		});
 	}
+	
+	function fn_menuInfo(mid, code, codename, sort_num, comment){
+			$("#mid").val(mid);
+			$("#code").val(code);
+			$("#codename").val(codename);
+			$("#sort_num").val(sort_num);
+			$("#comment").val(comment);
+			
+			$("#code").attr("readonly", true);
+	}
+	
 	$(document).on('click', '#btnSave', function(e){ 
 		e.preventDefault(); 
 		var url = "${saveURL}"; 
+		
+		if($("#mid").val() != 0){
+			url = "${updateURL}";	
+		}
+		
+		if($("#code").val() == ""){
+			alert("コードを確認してください"); 
+			return; 
+		}
+		
 		var paramData = { 
-				"code" : $("#code").val() , 
-				"codename" : $("#codename").val() , 
-				"sort_num" : $("#sort_num").val() , 
-				"comment" : $("#comment").val() 
-			}; 
+			"code" : $("#code").val() , 
+			"codename" : $("#codename").val() , 
+			"sort_num" : $("#sort_num").val() , 
+			"comment" : $("#comment").val() 
+		}; 
 		$.ajax({ 
 			url : url , 
 			type : "POST" , 
@@ -64,9 +91,40 @@
 			data : paramData , 
 			success : function(result){ 
 				fn_showList(); 
+				$("#btnInit").trigger("click");
 			} 
 		}); 
 	});
+	
+	$(document).on('click','#btnInit', function(e){
+		$('#mid').val(0);
+		$('#code').val('');
+		$('#codename').val('');
+		$('#sort_num').val('');
+		$('#comment').val('');
+		$('#code').attr("readonly", false);
+	});
+	$(document).on('click', '#btnDelete', function(e){ 
+		e.preventDefault(); 
+		if ($("#code").val() == "") { 
+			alert("コードを確認してください"); 
+			return; 
+		} 
+		var url = "${deleteURL}"; 
+		var paramData = { "code" : $("#code").val() }; 
+		$.ajax({ 
+			url : url , 
+			type : "POST" , 
+			dataType : "json" , 
+			data : paramData , 
+			success : function(result){ 
+				fn_showList(); 
+				//削除後、内容リセット 
+				$("#btnInit").trigger("click");
+			} 
+		}); 
+	});
+
 </script>
 <style> 
 	#paginationBox{ padding : 10px 0px; } 

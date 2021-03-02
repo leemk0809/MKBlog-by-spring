@@ -24,14 +24,14 @@ public class MenuDAOTest {
 	@Inject
 	private MenuDAO menuDAO;
 	
-	@Test @Ignore 
+	@Test
 	public void testGetMenuList() throws Exception {
 		List<MenuVO> menuList = menuDAO.getMenuList();
 		
 		logger.info("menuListSize : " + menuList.size());
 	}
 	
-	@Test
+	@Test @Ignore 
 	public void testInsertMenu() throws Exception {
 		MenuVO menuVO = new MenuVO();
 		

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mk.mkblog.web.menu.model.MenuVO;
 import com.mk.mkblog.web.menu.service.MenuService;
@@ -24,11 +25,13 @@ public class RestMenuController {
 	@Inject 
 	private MenuService menuService;
 	
+	@ResponseBody
 	@RequestMapping(value="/getMenuList", method=RequestMethod.POST)
 	public Map<String, Object> getMenuList() throws Exception{
 		Map<String,Object> result = new HashMap<String, Object>();
 		
 		try {
+			logger.info("aaaaaaaaaaaaaaaaaaaaaaa");
 			result.put("menuList", menuService.getMenuList());
 			result.put("status", "OK");
 		} catch (Exception e) {
@@ -38,6 +41,7 @@ public class RestMenuController {
 		return result;
 	}
 	
+	@ResponseBody
 	@RequestMapping(value="/saveMenu", method=RequestMethod.POST)
 	public Map<String, Object> saveMenu(MenuVO menuVO) throws Exception{
 		Map<String,Object> result = new HashMap<String, Object>();
@@ -52,6 +56,7 @@ public class RestMenuController {
 		return result;
 	}
 	
+	@ResponseBody
 	@RequestMapping(value="/updateMenu", method=RequestMethod.POST)
 	public Map<String, Object> updateMenu(MenuVO menuVO) throws Exception{
 		Map<String,Object> result = new HashMap<String, Object>();
@@ -66,6 +71,7 @@ public class RestMenuController {
 		return result;
 	}
 	
+	@ResponseBody
 	@RequestMapping(value="/deleteMenu", method=RequestMethod.POST)
 	public Map<String, Object> deleteMenu(@RequestParam("code")String code) throws Exception{
 		Map<String,Object> result = new HashMap<String, Object>();
