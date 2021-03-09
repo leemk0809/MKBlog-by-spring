@@ -110,7 +110,7 @@ public class BoardController {
 	 @ResponseBody
 	 @RequestMapping(value = "/saveReply", method = RequestMethod.POST)
 	 public Map<String, Object> saveReply(@RequestBody ReplyVO replyVO) throws Exception{
-		 Map<String, Object> result = new HashMap<>();
+		 Map<String, Object> result = new HashMap<String, Object>();
 		 
 		 try {
 			 boardService.saveReply(replyVO);
@@ -126,7 +126,7 @@ public class BoardController {
 	 @ResponseBody
 	 @RequestMapping(value = "/updateReply", method = RequestMethod.POST)
 	 public Map<String, Object> updateReply(@RequestBody ReplyVO replyVO) throws Exception{
-		 Map<String, Object> result = new HashMap<>();
+		 Map<String, Object> result = new HashMap<String, Object>();
 		 try {
 			 boardService.updateReply(replyVO);
 			 result.put("status", "OK");
@@ -140,7 +140,7 @@ public class BoardController {
 	 @ResponseBody
 	 @RequestMapping(value = "/deleteReply", method = RequestMethod.POST)
 	 public Map<String, Object> deleteReply(@RequestParam("rid")int rid) throws Exception{
-		 Map<String, Object> result = new HashMap<>();
+		 Map<String, Object> result = new HashMap<String, Object>();
 		 try {
 			 boardService.deleteReply(rid);
 			 result.put("status", "OK");
