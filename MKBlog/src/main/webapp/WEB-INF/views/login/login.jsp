@@ -10,19 +10,19 @@
 <body>
 <!-- login form {s} --> 
 	<form:form class="form-signin" name="form" id="form" role="form"
-		 modelAttribute="userVO" method="post" action="${pageContext.request.contextPath}/board/saveBoard"> 
+		 modelAttribute="userVO" method="post" action="${pageContext.request.contextPath}/"> 
 	 	<div class="text-center mb-4"> 
 	 		<h1 class="h3 mb-3 font-weight-normal">MK.COM</h1> 
 	 	</div> 
 	 	<div class="form-label-group"> 
-	 		<form:input path="uid" id="uid" class="form-control" placeholder="User ID" required="" autofocus="" /> 
+	 		<form:input path="uid" id="uid" class="form-control" placeholder="アイディー" required="" autofocus="" /> 
 	 		<label for="uid" class="sr-only">ユーザーアイディー</label> 
 	 	</div>
 	 	<div class="form-label-group"> 
-	 		<form:password path="pwd" id="pwd" class="form-control" placeholder="User Password" required="" /> 
+	 		<form:password path="pwd" id="pwd" class="form-control" placeholder="パスワード" required="" /> 
 	 		<label for="pwd" class="sr-only">ユーザーパスワード</label> 
 	 	</div> 
-	 	<button class="btn btn-lg btn-primary btn-block" type="submit">加入</button>
+	 	<button class="btn btn-lg btn-primary btn-block" type="submit">ログイン</button>
 	 	<span style="font-size:11pt;">Sign up</span> 
 	 	<p class="mt-5 mb-3 text-muted text-center">© 2021. MK. All rights reserved.</p> 
 	 </form:form> 

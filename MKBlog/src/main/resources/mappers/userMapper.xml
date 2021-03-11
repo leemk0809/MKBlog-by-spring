@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mk.mkblog.web.user.userMapper">
+	<select id="getUserList" resultType="com.mk.mkblog.web.user.model.UserVO">
+		SELECT
+			UID,
+			NAME,
+			PWD,
+			EMAIL,
+			GRADE,
+			REG_DT
+		FROM
+			TBL_USER
+	</select>
+	
+	<select id="getUserInfo" resultType="com.mk.mkblog.web.user.model.UserVO" parameterType="String">
+		SELECT
+			UID,
+			NAME,
+			PWD,
+			EMAIL,
+			GRADE,
+			REG_DT
+		FROM
+			TBL_USER
+		WHERE 
+			UID = #{uid}
+	</select>
+	
+	<insert id="insertUser" parameterType="com.mk.mkblog.web.user.model.UserVO">
+		INSERT INTO TBL_USER(UID, NAME, PWD, EMAIL, REG_DT)
+		VALUES(
+			#{uid},
+			#{name},
+			#{pwd},
+			#{email},
+			now()
+		)
+	</insert>
+	
+	<update id="updateUser" parameterType="com.mk.mkblog.web.user.model.UserVO">
+		UPDATE TBL_USER
+		SET
+			NAME = #{name},
+			PWD = #{pwd},
+			EMAIL = #{email},
+			GRADE = #{grade}
+		WHERE
+			UID = #{uid}
+	</update>
+	
+	<delete id="deleteUser" parameterType="String">
+		DELETE FROM TBL_USER
+		WHERE UID = #{uid}
+	</delete>
+</mapper>

@@ -2,7 +2,6 @@ package com.mk.mkblog.web.board.service;
 
 import java.util.List;
 
-import com.mk.mkblog.common.Pagination;
 import com.mk.mkblog.common.Search;
 import com.mk.mkblog.web.board.model.BoardVO;
 import com.mk.mkblog.web.board.model.ReplyVO;

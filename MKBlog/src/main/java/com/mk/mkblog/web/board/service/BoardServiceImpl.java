@@ -1,12 +1,12 @@
 package com.mk.mkblog.web.board.service;
 
 import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.mk.mkblog.common.Pagination;
 import com.mk.mkblog.common.Search;
 import com.mk.mkblog.web.board.dao.BoardDAO;
 import com.mk.mkblog.web.board.model.BoardVO;
