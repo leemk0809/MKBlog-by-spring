@@ -1,14 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ include file="/WEB-INF/views/layout/header.jsp" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>ボード</title>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script>
 	$(document).on('click','#btnList',function(e){
 		location.href = "${pageContext.request.contextPath}/board/getBoardList";
@@ -40,7 +38,7 @@
 			success: function(result){
 				var htmls = "";
 				if(result.length < 1){
-					htmls.push("コメントがありません。");
+					htmls += "コメントがありません。";
 				} else {
 					$(result).each(function(){
 						htmls += '<div class="media text-muted pt-3" id="rid' + this.rid + '">';
