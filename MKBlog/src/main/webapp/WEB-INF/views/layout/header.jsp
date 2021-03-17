@@ -1,4 +1,4 @@
-<%-- <!-- jQuery -->
+<!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 
 <!-- Bootstrap CSS -->
@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/common/css/common.css?after">
 
 <!-- メニューバー -->
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> --%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> 
 <script>
 	function getBoardList(){
 		location.href="${pageContext.request.contextPath}/board/getBoardList";	

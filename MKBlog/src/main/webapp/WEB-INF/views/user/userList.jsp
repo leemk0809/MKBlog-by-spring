@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="/WEB-INF/views/layout/header.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>ユーザー</title>
+<c:url var="getBoardListURL" value="/board/getBoardList"/>
+<c:url var="globalCtx" value=""/>
 <script> 
 	$(document).on('click', '#btnSearch', function(e){ 
 		e.preventDefault(); 
@@ -54,7 +57,7 @@
 <body>
 <article> 
 	<div class="container"> 
-		<h2>User list</h2> 
+		<h2>ユーザーリスト</h2> 
 		<div class="table-responsive"> 
 			<table class="table table-striped table-sm"> 
 				<colgroup> 
@@ -66,17 +69,17 @@
 				</colgroup> 
 				<thead> 
 					<tr> 
-						<th>USER ID</th> 
-						<th>USER NAME</th> 
-						<th>EMAIL</th> 
-						<th>GRADE</th> 
-						<th>가입일</th> 
+						<th>アイディ</th> 
+						<th>名前</th> 
+						<th>イーメール</th> 
+						<th>グレード</th> 
+						<th>加入日</th> 
 					</tr> 
 				</thead> 
 				<tbody> 
 					<c:choose> 
 						<c:when test="${empty userList }" >
-							<tr><td colspan="5" align="center">데이터가 없습니다.</td></tr> 
+							<tr><td colspan="5" align="center">データがありません。</td></tr> 
 						</c:when> 
 						<c:when test="${!empty userList}"> 
 							<c:forEach var="list" items="${userList}"> 
@@ -121,9 +124,9 @@
 		 <div class="form-group row justify-content-center"> 
 		 	<div style="padding-right:10px"> 
 		 		<select class="form-control form-control-sm" name="searchType" id="searchType"> 
-		 			<option value="title" <c:if test="${pagination.searchType eq 'title'}">selected</c:if> >제목</option>
-		 			<option value="content" <c:if test="${pagination.searchType eq 'content'}">selected</c:if>>본문</option>
-		 			<option value="reg_id" <c:if test="${pagination.searchType eq 'reg_id'}">selected</c:if>>작성자</option> 
+		 			<option value="title" <c:if test="${pagination.searchType eq 'title'}">selected</c:if> >タイトル</option>
+		 			<option value="content" <c:if test="${pagination.searchType eq 'content'}">selected</c:if>>内容</option>
+		 			<option value="reg_id" <c:if test="${pagination.searchType eq 'reg_id'}">selected</c:if>>作成者</option> 
 		 		</select> 
 		 	</div> 
 			<div style="padding-right:10px"> 

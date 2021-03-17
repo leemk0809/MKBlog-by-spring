@@ -52,7 +52,7 @@ public class BoardController {
 		
 		model.addAttribute("pagination", search);
 		model.addAttribute("boardList", boardService.getBoardList(search));
-		return "/board/index";
+		return "/board/boardList";
 	}
 	
 	@RequestMapping("/boardForm")

@@ -7,6 +7,16 @@
 <meta charset="UTF-8">
 <title>ログイン</title>
 </head>
+<script>
+	function fn_btnSignupClick(){
+		location.href="${pageContext.request.contextPath}/login/signupForm";
+	}
+	
+	$(document).on('click', '#btnLogin',function(e){
+		e.preventDefault();
+		location.href = "${pageContext.request.contextPath}/board/getBoardList";
+	});
+</script> 
 <body>
 <!-- login form {s} --> 
 	<form:form class="form-signin" name="form" id="form" role="form"
@@ -22,8 +32,10 @@
 	 		<form:password path="pwd" id="pwd" class="form-control" placeholder="パスワード" required="" /> 
 	 		<label for="pwd" class="sr-only">ユーザーパスワード</label> 
 	 	</div> 
-	 	<button class="btn btn-lg btn-primary btn-block" type="submit">ログイン</button>
-	 	<span style="font-size:11pt;">Sign up</span> 
+	 	<button class="btn btn-lg btn-primary btn-block" type="submit" id="btnLogin">ログイン</button>
+	 	<span style="font-size:11pt;">
+	 		<a href="#" onclick="fn_btnSignupClick()">Sign up</a>
+	 	</span>
 	 	<p class="mt-5 mb-3 text-muted text-center">© 2021. MK. All rights reserved.</p> 
 	 </form:form> 
 <!-- login form {e} -->
